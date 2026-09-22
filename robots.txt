@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+
+# Al publicar el sitio, reemplazá TU-DOMINIO.com por tu dirección real
+Sitemap: https://TU-DOMINIO.com/sitemap.xml

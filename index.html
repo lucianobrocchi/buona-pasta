@@ -1,0 +1,462 @@
+﻿<!doctype html>
+<html lang="es-AR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Buona Pasta · Pastas caseras: ravioles, sorrentinos, ñoquis y canelones</title>
+  <meta name="description" content="Fábrica de pastas caseras. Ravioles, sorrentinos, raviolones, ñoquis y canelones. Armá tu pedido online y confirmalo por WhatsApp. Retiro o envío.">
+  <meta name="theme-color" content="#FBF5E9">
+  <meta name="color-scheme" content="light">
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="favicon-48.png" type="image/png" sizes="48x48">
+  <link rel="apple-touch-icon" href="apple-touch-icon.png">
+  <link rel="manifest" href="manifest.json">
+
+  <!-- Al publicar el sitio, reemplazá https://TU-DOMINIO.com por tu dirección real (para que se vea la imagen al compartir el link) -->
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="es_AR">
+  <meta property="og:site_name" content="Buona Pasta">
+  <meta property="og:title" content="Buona Pasta · Pastas caseras">
+  <meta property="og:description" content="Ravioles, sorrentinos, raviolones, ñoquis y canelones. Armá tu pedido en un minuto y confirmalo por WhatsApp.">
+  <meta property="og:image" content="https://TU-DOMINIO.com/assets/img/og.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <link rel="preload" href="assets/fonts/fraunces.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="assets/fonts/fraunces-italic.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="assets/fonts/dmsans.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="assets/img/hero-poster.webp" as="image" type="image/webp" fetchpriority="high">
+  <link rel="stylesheet" href="assets/css/styles.css">
+  <script>
+    /* Marca "js" y decide si se reducen las animaciones: por defecto sigue la preferencia del sistema,
+       pero la persona puede elegir otra cosa con el interruptor (se guarda en el navegador). */
+    (function () {
+      var d = document.documentElement, pref = null;
+      d.classList.add('js');
+      try { pref = localStorage.getItem('buona.motion'); } catch (e) {}
+      var os = !!(window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches);
+      if (pref === 'full' ? false : (pref === 'reduced' ? true : os)) d.classList.add('reduce-motion');
+      if (os) d.classList.add('os-reduce');
+      if (pref) d.classList.add('motion-chosen');
+    })();
+  </script>
+</head>
+
+<body>
+  <a class="skip" href="#menu">Saltar al menú</a>
+
+  <!-- ============ Íconos (sprite) ============ -->
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+    <defs>
+      <symbol id="i-bag" viewBox="0 0 24 24"><path d="M5.6 8.6h12.8l-1.1 10.9a1.4 1.4 0 0 1-1.4 1.3H8.1a1.4 1.4 0 0 1-1.4-1.3L5.6 8.6Z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="M9 8.6V7.2a3 3 0 0 1 6 0v1.4" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></symbol>
+      <symbol id="i-plus" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></symbol>
+      <symbol id="i-minus" viewBox="0 0 24 24"><path d="M5 12h14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></symbol>
+      <symbol id="i-close" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6 6 18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></symbol>
+      <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M4.5 12h15M13.5 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+      <symbol id="i-down" viewBox="0 0 24 24"><path d="M12 4.5v15M6 13.5l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+      <symbol id="i-check" viewBox="0 0 24 24"><path d="m5 12.5 4.6 4.6L19 7.5" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+      <symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M12 7.5V12l3 2" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+      <symbol id="i-copy" viewBox="0 0 24 24"><rect x="8.5" y="8.5" width="11" height="11" rx="2.2" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M15.5 8.5V6.7a2.2 2.2 0 0 0-2.2-2.2H6.7a2.2 2.2 0 0 0-2.2 2.2v6.6a2.2 2.2 0 0 0 2.2 2.2h1.8" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></symbol>
+      <symbol id="i-pin" viewBox="0 0 24 24"><path d="M12 21s6.5-5.6 6.5-11a6.5 6.5 0 1 0-13 0c0 5.4 6.5 11 6.5 11Z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><circle cx="12" cy="10" r="2.4" fill="none" stroke="currentColor" stroke-width="1.8"/></symbol>
+      <symbol id="i-insta" viewBox="0 0 24 24"><rect x="3.5" y="3.5" width="17" height="17" rx="5" fill="none" stroke="currentColor" stroke-width="1.8"/><circle cx="12" cy="12" r="4" fill="none" stroke="currentColor" stroke-width="1.8"/><circle cx="17.2" cy="6.8" r="1.1" fill="currentColor"/></symbol>
+      <symbol id="i-spark" viewBox="0 0 24 24"><path d="M12 0c.9 6.6 5.4 11.1 12 12-6.6.9-11.1 5.4-12 12-.9-6.6-5.4-11.1-12-12C6.6 11.1 11.1 6.6 12 0Z" fill="currentColor"/></symbol>
+      <symbol id="i-wa" viewBox="0 0 24 24"><path fill="currentColor" d="M17.47 14.38c-.3-.15-1.76-.87-2.03-.97-.27-.1-.47-.15-.67.15-.2.3-.77.97-.94 1.17-.17.2-.35.22-.65.07-.3-.15-1.26-.46-2.4-1.48-.88-.79-1.48-1.76-1.65-2.06-.17-.3-.02-.46.13-.6.13-.14.3-.35.45-.52.15-.18.2-.3.3-.5.1-.2.05-.37-.03-.52-.07-.15-.67-1.61-.92-2.2-.24-.58-.49-.5-.67-.51h-.57c-.2 0-.52.07-.8.37-.27.3-1.04 1.02-1.04 2.48 0 1.46 1.07 2.88 1.21 3.07.15.2 2.1 3.2 5.08 4.49.71.3 1.26.49 1.7.63.71.23 1.36.2 1.87.12.57-.08 1.76-.72 2-1.41.25-.7.25-1.29.17-1.41-.07-.13-.27-.2-.57-.35Zm-5.42 7.4h-.01a9.87 9.87 0 0 1-5.03-1.38l-.36-.21-3.74.98 1-3.65-.24-.37a9.86 9.86 0 0 1-1.51-5.26C2.16 6.44 6.6 2 12.05 2c2.64 0 5.12 1.03 6.99 2.9a9.83 9.83 0 0 1 2.89 6.99c0 5.45-4.44 9.89-9.88 9.89Zm8.41-18.3A11.82 11.82 0 0 0 12.05 0C5.5 0 .16 5.34.16 11.9c0 2.1.55 4.14 1.59 5.95L.06 24l6.3-1.65a11.88 11.88 0 0 0 5.69 1.45h.01c6.55 0 11.89-5.34 11.89-11.9 0-3.18-1.24-6.17-3.48-8.42Z"/></symbol>
+      <symbol id="i-leaf" viewBox="0 0 24 24"><path d="M5 19c-1-6 1.5-13 14-14 1 11-5 14-10 14-1.5 0-3-.3-4-1Zm0 0 6.5-6.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+      <symbol id="i-install" viewBox="0 0 24 24"><path d="M12 3v11m0 0 4-4m-4 4-4-4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M5 16v2.5A2.5 2.5 0 0 0 7.5 21h9a2.5 2.5 0 0 0 2.5-2.5V16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></symbol>
+    </defs>
+  </svg>
+
+  <!-- ============ Header ============ -->
+  <header class="site-header" id="header">
+    <div class="site-header__in">
+      <a class="brand" href="#top" aria-label="Buona Pasta, ir al inicio">
+        <img class="brand__mark" src="favicon.svg" alt="" width="36" height="36">
+        <span class="brand__name">Buona <em>Pasta</em></span>
+      </a>
+
+      <nav class="nav" aria-label="Principal">
+        <a href="#menu">Menú</a>
+        <a href="#como-se-hace">Cómo se hace</a>
+        <a href="#como-pedir">Cómo pedir</a>
+        <a href="#preguntas">Preguntas</a>
+        <a href="#contacto">Contacto</a>
+      </nav>
+
+      <div class="site-header__actions">
+        <button class="cart-btn" id="cart-btn" type="button" aria-haspopup="dialog" aria-label="Ver mi pedido">
+          <svg class="ico" aria-hidden="true"><use href="#i-bag"/></svg>
+          <span class="cart-btn__label">Mi pedido</span>
+          <span class="cart-btn__total" id="cart-btn-total" hidden></span>
+          <span class="cart-btn__count" id="cart-count" hidden>0</span>
+        </button>
+        <button class="burger" id="burger" type="button" aria-label="Abrir menú" aria-expanded="false" aria-controls="mobile-nav">
+          <span></span><span></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <div class="mobile-nav" id="mobile-nav" aria-hidden="true">
+    <nav aria-label="Menú móvil">
+      <a href="#menu">Menú</a>
+      <a href="#como-se-hace">Cómo se hace</a>
+      <a href="#como-pedir">Cómo pedir</a>
+      <a href="#preguntas">Preguntas</a>
+      <a href="#contacto">Contacto</a>
+    </nav>
+    <p class="mobile-nav__foot">Pastas caseras · pedí por WhatsApp</p>
+  </div>
+
+  <main id="top">
+    <!-- ============ HERO ============ -->
+    <section class="hero" id="hero">
+      <div class="hero__grid container">
+        <div class="hero__copy">
+          <p class="eyebrow" data-hero-in="0"><span class="eyebrow__dot"></span>Fábrica de pastas caseras</p>
+          <h1 class="hero__title" id="hero-title">La pasta de los domingos, <em>cuando quieras.</em></h1>
+          <p class="hero__lead" data-hero-in="1">Ravioles, sorrentinos, raviolones, ñoquis y canelones caseros. Elegí lo que se te antoja y mandanos el pedido por WhatsApp en un minuto.</p>
+          <div class="hero__cta" data-hero-in="2">
+            <a class="btn btn--primary btn--lg" href="#menu" data-magnetic>
+              Armar mi pedido
+              <svg class="ico" aria-hidden="true"><use href="#i-arrow"/></svg>
+            </a>
+            <a class="btn btn--ghost btn--lg" href="#como-pedir">Cómo pedir</a>
+          </div>
+          <ul class="facts" data-hero-in="3">
+            <li><svg class="ico" aria-hidden="true"><use href="#i-check"/></svg>Retiro o envío</li>
+            <li><svg class="ico" aria-hidden="true"><use href="#i-check"/></svg>Pedís por WhatsApp</li>
+            <li><svg class="ico" aria-hidden="true"><use href="#i-check"/></svg><span>Desde <b data-min-price>$7.000</b> el kilo</span></li>
+          </ul>
+          <p class="motion-note" id="motion-note" hidden>
+            <svg class="ico" aria-hidden="true"><use href="#i-spark"/></svg>
+            <span>Tu sistema tiene las animaciones desactivadas.</span>
+            <button type="button" data-motion="full">Activarlas</button>
+          </p>
+        </div>
+
+        <div class="hero__visual">
+          <div class="arch-wrap">
+            <div class="arch" id="arch">
+              <img class="arch__poster" src="assets/img/hero-poster.webp" alt="Una cocinera tamizando harina sobre una mesa con huevos, tomates y fideos" width="720" height="1280" fetchpriority="high" decoding="async">
+              <video class="arch__video" id="hero-video" muted loop playsinline preload="none" data-src="assets/video/hero.mp4" aria-hidden="true" tabindex="-1" disablepictureinpicture disableremoteplayback></video>
+              <canvas class="arch__dust" id="hero-dust" aria-hidden="true"></canvas>
+              <div class="arch__shade"></div>
+              <div class="arch__curtain" aria-hidden="true"></div>
+            </div>
+
+            <a class="seal" href="#menu" tabindex="-1" aria-hidden="true">
+              <svg viewBox="0 0 120 120" class="seal__svg" aria-hidden="true">
+                <defs><path id="seal-path" d="M60 60m-45 0a45 45 0 1 1 90 0a45 45 0 1 1-90 0"/></defs>
+                <circle cx="60" cy="60" r="59" fill="#F0B23C"/>
+                <circle cx="60" cy="60" r="55.5" fill="none" stroke="#21150F" stroke-opacity=".28" stroke-width=".8" stroke-dasharray="1.5 3"/>
+                <text font-size="10.6" font-weight="700" letter-spacing="1.4" fill="#21150F"><textPath href="#seal-path" textLength="279" lengthAdjust="spacing">PASTA CASERA ✦ SABOR DE FAMILIA ✦ </textPath></text>
+              </svg>
+              <svg class="seal__ico ico" aria-hidden="true"><use href="#i-down"/></svg>
+            </a>
+
+            <a class="sticker sticker--a" href="#p-ravioles" aria-label="Ravioles, ver en el menú">
+              <img src="assets/img/stk-ravioles.webp" alt="" width="240" height="240" loading="eager" decoding="async">
+              <span class="sticker__tag">Ravioles <b data-price-of="ravioles"></b></span>
+            </a>
+            <a class="sticker sticker--b" href="#p-noquis" aria-label="Ñoquis, ver en el menú">
+              <img src="assets/img/stk-noquis.webp" alt="" width="240" height="240" loading="eager" decoding="async">
+              <span class="sticker__tag">Ñoquis <b data-price-of="noquis"></b></span>
+            </a>
+          </div>
+        </div>
+      </div>
+      <a class="scroll-cue" href="#menu" tabindex="-1" aria-hidden="true"><svg class="ico" aria-hidden="true"><use href="#i-down"/></svg></a>
+    </section>
+
+    <!-- ============ CINTA (marquee) ============ -->
+    <div class="marquee" aria-hidden="true">
+      <div class="marquee__clip"><div class="marquee__track">
+        <div class="marquee__set"><span>Ravioles</span><svg class="spark"><use href="#i-spark"/></svg><span>Sorrentinos</span><svg class="spark"><use href="#i-spark"/></svg><span>Raviolones</span><svg class="spark"><use href="#i-spark"/></svg><span>Ñoquis</span><svg class="spark"><use href="#i-spark"/></svg><span>Canelones</span><svg class="spark"><use href="#i-spark"/></svg></div>
+        <div class="marquee__set"><span>Ravioles</span><svg class="spark"><use href="#i-spark"/></svg><span>Sorrentinos</span><svg class="spark"><use href="#i-spark"/></svg><span>Raviolones</span><svg class="spark"><use href="#i-spark"/></svg><span>Ñoquis</span><svg class="spark"><use href="#i-spark"/></svg><span>Canelones</span><svg class="spark"><use href="#i-spark"/></svg></div>
+        <div class="marquee__set"><span>Ravioles</span><svg class="spark"><use href="#i-spark"/></svg><span>Sorrentinos</span><svg class="spark"><use href="#i-spark"/></svg><span>Raviolones</span><svg class="spark"><use href="#i-spark"/></svg><span>Ñoquis</span><svg class="spark"><use href="#i-spark"/></svg><span>Canelones</span><svg class="spark"><use href="#i-spark"/></svg></div>
+        <div class="marquee__set"><span>Ravioles</span><svg class="spark"><use href="#i-spark"/></svg><span>Sorrentinos</span><svg class="spark"><use href="#i-spark"/></svg><span>Raviolones</span><svg class="spark"><use href="#i-spark"/></svg><span>Ñoquis</span><svg class="spark"><use href="#i-spark"/></svg><span>Canelones</span><svg class="spark"><use href="#i-spark"/></svg></div>
+      </div></div>
+    </div>
+
+    <!-- ============ MENÚ ============ -->
+    <section class="menu" id="menu" aria-labelledby="menu-title">
+      <div class="container">
+        <header class="sec-head" data-reveal>
+          <p class="eyebrow"><span class="eyebrow__dot"></span>El menú</p>
+          <h2 class="sec-title" id="menu-title">Elegí tu <em>pasta</em></h2>
+          <p class="sec-lead">Precios por kilo (los canelones, por unidad). Podés pedir de a medio kilo y combinar rellenos.</p>
+        </header>
+
+        <div class="menu-filter" id="menu-filter" role="group" aria-label="Filtrar el menú" data-reveal>
+          <button type="button" class="filter-chip is-on" data-filter="all">Todos</button>
+          <button type="button" class="filter-chip" data-filter="veg"><svg class="ico" aria-hidden="true"><use href="#i-leaf"/></svg>Vegetarianas</button>
+        </div>
+
+        <div class="menu-grid" id="menu-grid"></div>
+        <noscript><p class="menu-note">Para armar tu pedido en la web necesitás activar JavaScript en tu navegador. También podés pedirnos las pastas por WhatsApp.</p></noscript>
+
+        <p class="menu-note" data-reveal>Un kilo rinde unas 4 porciones. ¿Dudas con las cantidades? Escribinos y te ayudamos.</p>
+      </div>
+    </section>
+
+    <!-- ============ CÓMO SE HACE (animación con scroll) ============ -->
+    <section class="make" id="como-se-hace" aria-labelledby="make-title">
+      <div class="make__sticky">
+        <div class="make__inner container">
+          <div class="make__copy">
+            <p class="eyebrow eyebrow--light"><span class="eyebrow__dot"></span>Así nace un raviol</p>
+            <h2 class="make__title" id="make-title">De la harina <em>a tu mesa.</em></h2>
+
+            <ol class="make__steps" id="make-steps">
+              <li class="step is-on"><span class="step__n">01</span><h3>Harina y huevo</h3><p>Todo arranca con lo simple: harina, huevos y un poco de paciencia.</p></li>
+              <li class="step"><span class="step__n">02</span><h3>Amasado</h3><p>Se amasa hasta que queda suave y elástica, y se estira bien fina.</p></li>
+              <li class="step"><span class="step__n">03</span><h3>Relleno</h3><p>Cada bocado lleva su relleno: jamón y queso, verdura, ricota, calabaza…</p></li>
+              <li class="step"><span class="step__n">04</span><h3>Sellado y corte</h3><p>Se sella, se corta y quedan listos para llegar a tu mesa.</p></li>
+              <li class="step"><span class="step__n">05</span><h3>Listo para tu mesa</h3><p>Unos minutos en agua hirviendo y a disfrutar. ¿Los pedimos?</p></li>
+            </ol>
+
+            <div class="make__foot">
+              <ol class="make__dots" id="make-dots" aria-hidden="true"><li class="is-on"></li><li></li><li></li><li></li><li></li></ol>
+              <a class="btn btn--yolk make__cta" id="make-cta" href="#menu">Armar mi pedido <svg class="ico" aria-hidden="true"><use href="#i-arrow"/></svg></a>
+            </div>
+          </div>
+
+          <div class="make__stage" aria-hidden="true">
+            <div class="stage" id="stage"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ CÓMO PEDIR ============ -->
+    <section class="how" id="como-pedir" aria-labelledby="how-title">
+      <div class="container how__grid">
+        <div class="how__media" data-reveal>
+          <div class="how__arch">
+            <img src="assets/img/pedir-900.webp" srcset="assets/img/pedir-560.webp 560w, assets/img/pedir-900.webp 900w" sizes="(min-width: 900px) 460px, 80vw" width="900" height="1125" alt="Harina con una yema de huevo en el centro y nidos de tagliatelle sobre la mesa" loading="lazy" decoding="async">
+          </div>
+          <div class="how__badge" aria-hidden="true">
+            <svg class="ico"><use href="#i-wa"/></svg>
+            <span>Pedí en<br>1 minuto</span>
+          </div>
+        </div>
+
+        <div class="how__copy">
+          <header class="sec-head sec-head--left" data-reveal>
+            <p class="eyebrow"><span class="eyebrow__dot"></span>Cómo pedir</p>
+            <h2 class="sec-title" id="how-title">Pedir es <em>fácil.</em></h2>
+          </header>
+
+          <ol class="how__steps">
+            <li data-reveal>
+              <span class="how__n">1</span>
+              <div><h3>Elegí</h3><p>Sumá al pedido lo que se te antoje. Se pide de a medio kilo, así podés combinar rellenos.</p></div>
+            </li>
+            <li data-reveal>
+              <span class="how__n">2</span>
+              <div><h3>Confirmá</h3><p>Completá tus datos y mandanos el pedido por WhatsApp. Sin registros ni vueltas.</p></div>
+            </li>
+            <li data-reveal>
+              <span class="how__n">3</span>
+              <div><h3>Retirá o recibí</h3><p id="how-delivery">Coordinamos el horario y listo: pasta casera en tu mesa.</p></div>
+            </li>
+          </ol>
+
+          <div class="how__cta" data-reveal>
+            <a class="btn btn--primary btn--lg" href="#menu">Armar mi pedido <svg class="ico" aria-hidden="true"><use href="#i-arrow"/></svg></a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ PREGUNTAS FRECUENTES ============ -->
+    <section class="faq" id="preguntas" aria-labelledby="faq-title">
+      <div class="container">
+        <header class="sec-head" data-reveal>
+          <p class="eyebrow"><span class="eyebrow__dot"></span>Antes de pedir</p>
+          <h2 class="sec-title" id="faq-title">Preguntas <em>frecuentes</em></h2>
+        </header>
+
+        <div class="faq-list" data-reveal>
+          <div class="faq-item">
+            <h3><button type="button" class="faq-item__q" aria-expanded="false"><span>¿Se pueden congelar?</span><svg class="ico" aria-hidden="true"><use href="#i-down"/></svg></button></h3>
+            <div class="faq-item__panel"><div><p class="faq-item__a">Sí. Guardalas en el freezer apenas las recibís, en un recipiente cerrado o su bolsa, separadas para que no se peguen entre sí. Se conservan bien varias semanas.</p></div></div>
+          </div>
+          <div class="faq-item">
+            <h3><button type="button" class="faq-item__q" aria-expanded="false"><span>¿Cómo las cocino?</span><svg class="ico" aria-hidden="true"><use href="#i-down"/></svg></button></h3>
+            <div class="faq-item__panel"><div><p class="faq-item__a">Van directo del freezer (o la heladera) a una olla con abundante agua hirviendo y sal gruesa — no hace falta descongelarlas antes. Mirá el tiempo de cocción de cada una en su tarjeta del menú.</p></div></div>
+          </div>
+          <div class="faq-item">
+            <h3><button type="button" class="faq-item__q" aria-expanded="false"><span>¿Cuánto pido por persona?</span><svg class="ico" aria-hidden="true"><use href="#i-down"/></svg></button></h3>
+            <div class="faq-item__panel"><div><p class="faq-item__a">Como referencia, 1 kg de pasta rinde unas 4 porciones (y se calculan 2 canelones por persona). En cada producto del menú tenés botones de "¿Para cuántos?" que calculan la cantidad solos.</p></div></div>
+          </div>
+          <div class="faq-item">
+            <h3><button type="button" class="faq-item__q" aria-expanded="false"><span>¿Puedo combinar sabores?</span><svg class="ico" aria-hidden="true"><use href="#i-down"/></svg></button></h3>
+            <div class="faq-item__panel"><div><p class="faq-item__a">Sí. Se pide de a medio kilo, así que podés combinar los rellenos que quieras dentro del mismo producto y sumar todo en un solo pedido.</p></div></div>
+          </div>
+          <div class="faq-item">
+            <h3><button type="button" class="faq-item__q" aria-expanded="false"><span>¿Qué medios de pago aceptan?</span><svg class="ico" aria-hidden="true"><use href="#i-down"/></svg></button></h3>
+            <div class="faq-item__panel"><div><p class="faq-item__a" data-faq="pay">Lo coordinamos por WhatsApp al confirmar el pedido.</p></div></div>
+          </div>
+          <div class="faq-item">
+            <h3><button type="button" class="faq-item__q" aria-expanded="false"><span>¿Hacen envíos?</span><svg class="ico" aria-hidden="true"><use href="#i-down"/></svg></button></h3>
+            <div class="faq-item__panel"><div><p class="faq-item__a" data-faq="delivery">Retiro por el local o envío a domicilio. El costo del envío se confirma por WhatsApp.</p></div></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ CIERRE ============ -->
+    <section class="closing" aria-labelledby="closing-title">
+      <div class="closing__media" aria-hidden="true">
+        <img src="assets/img/closing-poster.webp" alt="" width="1280" height="720" loading="lazy" decoding="async">
+        <video id="closing-video" muted loop playsinline preload="none" data-src="assets/video/closing.mp4" tabindex="-1" disablepictureinpicture disableremoteplayback></video>
+      </div>
+      <div class="closing__in container">
+        <h2 class="closing__title" id="closing-title" data-reveal>¿Ya sabés qué vas a <em>comer hoy?</em></h2>
+        <p class="closing__lead" data-reveal>Armá tu pedido en un minuto y lo confirmamos por WhatsApp.</p>
+        <div class="closing__cta" data-reveal>
+          <a class="btn btn--yolk btn--lg" href="#menu" data-magnetic>Armar mi pedido <svg class="ico" aria-hidden="true"><use href="#i-arrow"/></svg></a>
+          <a class="btn btn--glass btn--lg" href="#" data-wa-link target="_blank" rel="noopener"><svg class="ico" aria-hidden="true"><use href="#i-wa"/></svg>Consultar por WhatsApp</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ============ FOOTER ============ -->
+  <footer class="footer" id="contacto">
+    <div class="container">
+      <div class="footer__top">
+        <div class="footer__intro">
+          <p class="footer__tag">Pastas caseras para las mesas de todos los días.</p>
+          <div class="footer__intro-cta">
+            <a class="btn btn--yolk" href="#" data-wa-link target="_blank" rel="noopener"><svg class="ico" aria-hidden="true"><use href="#i-wa"/></svg>Escribinos por WhatsApp</a>
+            <button type="button" class="btn btn--ghost-light" id="install-btn" hidden><svg class="ico" aria-hidden="true"><use href="#i-install"/></svg>Instalar la app</button>
+          </div>
+        </div>
+        <ul class="footer__info" id="footer-info"></ul>
+      </div>
+      <div class="footer__word" aria-hidden="true" data-reveal>Buona <em>Pasta</em></div>
+      <div class="footer__bottom">
+        <span>© <span id="year">2026</span> Buona Pasta. Todos los derechos reservados.</span>
+        <span class="footer__links">
+          <button type="button" class="footer__motion" id="motion-toggle">Reducir animaciones</button>
+          <a href="#top">Volver arriba ↑</a>
+        </span>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ============ Barra flotante del pedido ============ -->
+  <button class="cart-pill" id="cart-pill" type="button" hidden aria-haspopup="dialog">
+    <span class="cart-pill__count" id="pill-count">0</span>
+    <span class="cart-pill__label">Ver mi pedido</span>
+    <span class="cart-pill__total" id="pill-total">$0</span>
+    <svg class="ico" aria-hidden="true"><use href="#i-arrow"/></svg>
+  </button>
+
+  <!-- ============ Carrito / checkout ============ -->
+  <dialog class="cart" id="cart" aria-labelledby="cart-title">
+    <div class="cart__scrim" data-close></div>
+    <div class="cart__panel">
+      <header class="cart__head">
+        <h2 id="cart-title">Tu pedido</h2>
+        <button class="icon-btn" type="button" data-close aria-label="Cerrar"><svg class="ico" aria-hidden="true"><use href="#i-close"/></svg></button>
+      </header>
+
+      <div class="cart__body" id="cart-body">
+        <div class="cart__empty" id="cart-empty">
+          <div class="cart__empty-art" aria-hidden="true"><svg class="ico"><use href="#i-bag"/></svg></div>
+          <p><strong>Todavía no agregaste nada.</strong></p>
+          <p>Elegí tus pastas del menú y armá el pedido.</p>
+          <button class="btn btn--primary" type="button" data-close data-goto="#menu">Ver el menú</button>
+        </div>
+
+        <div id="cart-filled" hidden>
+          <ul class="cart__items" id="cart-items"></ul>
+
+          <div class="cart__cross" id="cart-cross" hidden></div>
+
+          <form class="cart__form" id="cart-form" novalidate>
+            <fieldset class="seg">
+              <legend>¿Cómo lo querés?</legend>
+              <div class="seg__row">
+                <label><input type="radio" name="mode" value="retiro" checked><span>Retiro</span></label>
+                <label><input type="radio" name="mode" value="envio"><span>Envío</span></label>
+              </div>
+            </fieldset>
+            <p class="cart__pickup" id="cart-pickup" hidden></p>
+            <div class="delivery-nudge" id="delivery-nudge" hidden>
+              <div class="delivery-nudge__bar"><div class="delivery-nudge__fill" id="delivery-fill"></div></div>
+              <p id="delivery-nudge-text"></p>
+            </div>
+
+            <div class="field">
+              <label for="f-name">Tu nombre</label>
+              <input id="f-name" name="name" type="text" autocomplete="name" placeholder="Ej: Lucía" required>
+              <small class="err" data-err="name"></small>
+            </div>
+
+            <div class="field" id="f-address-wrap" hidden>
+              <label for="f-address">Dirección de entrega</label>
+              <input id="f-address" name="address" type="text" autocomplete="street-address" placeholder="Calle, número y localidad">
+              <small class="err" data-err="address"></small>
+            </div>
+
+            <div class="field">
+              <label for="f-when">¿Para cuándo lo querés?</label>
+              <input id="f-when" name="when" type="text" placeholder="Ej: sábado a la tarde">
+              <div class="quick">
+                <button type="button" data-when="Hoy">Hoy</button>
+                <button type="button" data-when="Mañana">Mañana</button>
+                <button type="button" data-when="Este fin de semana">Fin de semana</button>
+              </div>
+            </div>
+
+            <fieldset class="seg seg--wrap" id="pay-group">
+              <legend>¿Cómo pagás?</legend>
+            </fieldset>
+
+            <div class="field">
+              <label for="f-notes">Aclaraciones <span class="opt">(opcional)</span></label>
+              <textarea id="f-notes" name="notes" rows="2" placeholder="Alergias, gustos, relleno de los canelones…"></textarea>
+            </div>
+          </form>
+        </div>
+
+        <div class="cart__done" id="cart-done" hidden>
+          <div class="cart__done-ico" aria-hidden="true"><svg class="ico"><use href="#i-check"/></svg></div>
+          <h3>¡Pedido armado!</h3>
+          <p>Se abrió WhatsApp con tu pedido. <strong>Tocá “Enviar” allá</strong> para confirmarlo.</p>
+          <div class="cart__done-actions">
+            <a class="btn btn--wa" id="done-open" href="#" target="_blank" rel="noopener"><svg class="ico" aria-hidden="true"><use href="#i-wa"/></svg>Abrir WhatsApp de nuevo</a>
+            <button class="btn btn--ghost" type="button" id="done-copy"><svg class="ico" aria-hidden="true"><use href="#i-copy"/></svg>Copiar pedido</button>
+            <button class="btn btn--ghost" type="button" id="done-back">Volver a mi pedido</button>
+            <button class="btn btn--link" type="button" id="done-clear">Ya lo envié, vaciar y empezar otro</button>
+          </div>
+        </div>
+      </div>
+
+      <footer class="cart__foot" id="cart-foot" hidden>
+        <p class="cart__warn" id="cart-warn" hidden>Falta cargar el número de WhatsApp del negocio (archivo <code>assets/js/data.js</code>).</p>
+        <div class="cart__total"><span>Total</span><strong id="cart-total">$0</strong></div>
+        <p class="cart__hint">El envío, si corresponde, se confirma por WhatsApp.</p>
+        <button class="btn btn--wa btn--lg btn--block" type="submit" form="cart-form" id="cart-send">
+          <svg class="ico" aria-hidden="true"><use href="#i-wa"/></svg>Enviar pedido por WhatsApp
+        </button>
+      </footer>
+    </div>
+  </dialog>
+
+  <div class="sr-only" id="live" aria-live="polite" role="status"></div>
+
+  <script src="assets/js/data.js" defer></script>
+  <script src="assets/js/app.js" defer></script>
+  <script src="assets/js/fx.js" defer></script>
+  <script>
+    /* Seguro: si algo del JS fallara, el hero igual se muestra */
+    setTimeout(function () { var h = document.getElementById('hero'); if (h) h.classList.add('is-ready'); }, 3200);
+  </script>
+</body>
+</html>
