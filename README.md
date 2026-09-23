@@ -3,6 +3,13 @@
 Sitio para la fábrica de pastas caseras: **menú con precios, carrito y pedido por WhatsApp**.
 Es una página estática (HTML + CSS + JS), sin instalación, sin base de datos y sin dependencias.
 
+**Ya está publicado:** <https://buona-pasta-one.vercel.app>
+
+El código vive en <https://github.com/lucianobrocchi/buona-pasta> (repo público — es solo el código de un
+sitio de menú, no hay nada sensible). Cada `git push` a la rama `main` se puede volver a desplegar; si
+querés que quede 100% automático (deploy solo con cada push, sin que yo tenga que disparar nada), decímelo
+la próxima vez y lo dejo conectado así en el dashboard de Vercel.
+
 ## Cómo verlo
 
 Hacé doble clic en `index.html` y se abre en el navegador.
@@ -35,39 +42,56 @@ Mientras `whatsapp` esté vacío, el carrito muestra un aviso y los botones de W
 
 En el mismo `data.js`, dentro de `products`:
 
-- `price` → precio por kilo (o por unidad, si `unit` es `'un'`).
-- `variants` → los gustos. Cada gusto puede tener su propio precio (por eso los sorrentinos cuestan `7500` o `8000` según el gusto).
-- `unit` → `'kg'` (se pide de a ½ kg) o `'un'` (por unidad).
+- `price` → precio por plancha, por kilo o por unidad, según `unit`.
+- `variants` → los gustos. Cada uno con su propio precio y su propia foto.
+- `unit` → `'plancha'` (se pide de a 1 plancha entera), `'kg'` (de a ½ kg) o `'un'` (por unidad).
+- `perTray` / `servesPerTray` → solo para `'plancha'`: cuántas unidades trae (dato real, el que me diste) y a
+  cuántas personas le calculamos 1 plancha (esto último es una estimación mía, para los botones "¿Para cuántos?").
 - `cook` → tiempo de cocción que se muestra en la tarjeta.
 - `veg` (dentro de cada gusto, en `variants`) → `true` si ese relleno es vegetariano. Se usa para el botón
   **"Vegetarianas"** del menú: filtra las tarjetas y, en la que tiene varios gustos, apaga los que no lo son.
 
-> **Revisá estos supuestos**, los cargué a partir de la lista de precios:
-> - Los ravioles, sorrentinos y raviolones están cargados **por kilo** (igual que los ñoquis). Si alguno se vende por docena, cambiá `unit` y el texto.
+> **Revisá estos supuestos:**
+> - Ravioles: **plancha de 30** (calculada para ~3 personas). Sorrentinos y raviolones: **plancha de 12**
+>   (~2 personas). Son los números que me pasaste; el "a cuántas personas" lo estimé yo — si te parece que
+>   sobra o falta, cambiá `servesPerTray` en `data.js` (no afecta el precio, solo los botones "¿Para cuántos?").
+> - Los precios de cada gusto **quedaron igual que antes** (ahora son "por plancha" en vez de "por kilo").
+>   Si la plancha debería costar otra cosa, actualizá `price`.
 > - “Sorrentinos de 4 quesos y jamón y cheddar a $8.000” se cargó como **dos gustos**: *4 quesos* y *jamón y cheddar*.
-> - Los tiempos de cocción y “1 kg ≈ 4 porciones” son orientativos: ajustalos a tu producto.
 > - **No me dijiste el relleno de los canelones**, así que quedaron marcados como `veg: false` (no aparecen bajo
 >   "Vegetarianas") para no arriesgarme a mostrar mal algo que puede llevar carne. Si son de verdura o ricota, cambiá
 >   esa línea a `veg: true` en `data.js`.
 
 ## Cambiar las fotos
 
-Las fotos son de stock (ver `CREDITS.md`). Para poner **fotos reales** de tus pastas, reemplazá los archivos de `assets/img/`
-manteniendo los nombres y las proporciones (`ravioles-720.webp` y `ravioles-1200.webp`, etc.). Formato recomendado: WebP.
+Las fotos son de stock (ver `CREDITS.md`). **Cada gusto tiene su propia foto** — al elegir un relleno en el menú,
+la foto de la tarjeta cambia sola. Para poner **fotos reales** de tus pastas, reemplazá los archivos de `assets/img/`
+manteniendo el nombre (`file`) y las proporciones que indica cada `variant.image` en `data.js`. Formato recomendado: WebP.
 
-## Publicarlo en internet
+## Publicarlo en internet / actualizar lo publicado
 
-Sirve cualquier hosting que aloje archivos estáticos. Subí **toda la carpeta**:
+Ya está publicado en Vercel (ver el link arriba de todo). Para subir un cambio nuevo:
 
-- **Netlify Drop** (netlify.com/drop): arrastrás la carpeta y listo.
-- **Vercel**, **Cloudflare Pages** o **GitHub Pages**.
-- Un hosting común: subís los archivos por FTP a `public_html`.
+```bash
+git add -A
+git commit -m "lo que cambiaste"
+git push
+```
 
-Después de publicarlo, en `index.html` reemplazá `https://TU-DOMINIO.com` por tu dirección real
-(así se ve la imagen cuando compartís el link por WhatsApp o redes).
+y avisame para que dispare el deploy (o pedime que lo deje conectado para que se dispare solo con cada push).
+
+Si en algún momento preferís otro hosting, sirve cualquiera que aloje archivos estáticos: Netlify, Cloudflare Pages,
+GitHub Pages, o subir la carpeta por FTP a `public_html`.
+
+Si cambiás de dominio, en `index.html`, `sitemap.xml` y `robots.txt` reemplazá `https://TU-DOMINIO.com` por tu
+dirección real (así se ve bien la imagen cuando compartís el link por WhatsApp o redes).
 
 ## Lo nuevo de esta vuelta
 
+- **Ravioles, sorrentinos y raviolones ahora se piden por plancha** (no por kilo). Ñoquis sigue por kilo,
+  canelones por unidad.
+- **Una foto por sabor**: al cambiar el relleno en el menú (o cuando el filtro "Vegetarianas" cambia el sabor
+  por vos), la foto de la tarjeta —y la del carrito— cambia con un fundido suave.
 - **Filtro "Vegetarianas"** arriba del menú (junto a "Todos").
 - **"¿Para cuántos?"** en cada tarjeta: botones 2 / 4 / 6 que calculan la cantidad solos.
 - **"¿Sumás algo más?"** dentro del carrito: sugiere el próximo producto que todavía no pediste.
