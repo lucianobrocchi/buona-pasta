@@ -9,8 +9,14 @@ Son imágenes de referencia: para vender lo mejor es reemplazarlas por fotos rea
 
 | Uso en el sitio | Autoría | Enlace |
 | --- | --- | --- |
-| Ravioles | Ray Suarez | https://www.pexels.com/photo/34565210/ |
-| Sorrentinos | Gonzalo Acuña | https://www.pexels.com/photo/17375423/ |
+| Ravioles · jamón y queso | Ray Suarez | https://www.pexels.com/photo/34565210/ |
+| Ravioles · verdura | Sylwester Ficek | https://www.pexels.com/photo/33583356/ |
+| Ravioles · 4 quesos | Andres Alaniz | https://www.pexels.com/photo/24538682/ |
+| Ravioles · ricota | Daigoro Folz | https://www.pexels.com/photo/32742948/ |
+| Sorrentinos · jamón y queso | Gonzalo Acuña | https://www.pexels.com/photo/17375423/ |
+| Sorrentinos · calabaza y queso | Nadin Sh | https://www.pexels.com/photo/18674110/ |
+| Sorrentinos · 4 quesos | Andres Alaniz | https://www.pexels.com/photo/24538680/ |
+| Sorrentinos · jamón y cheddar | Nadin Sh | https://www.pexels.com/photo/20545314/ |
 | Raviolones de verdura (y plato final de la animación) | Anya Dunes | https://www.pexels.com/photo/33396606/ |
 | Ñoquis | Karola G. (kaboompics.com) | https://www.pexels.com/photo/6659628/ |
 | Canelones | Alexey Demidov | https://www.pexels.com/photo/12409905/ |

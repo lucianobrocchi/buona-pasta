@@ -24,16 +24,33 @@
   };
 
   /* ---------- unidades ---------- */
-  const UNITS = { kg: { step: 0.5, min: 0.5, def: 1, max: 20 }, un: { step: 1, min: 1, def: 2, max: 40 } };
+  const UNITS = {
+    kg:      { step: 0.5, min: 0.5, def: 1, max: 20 },
+    un:      { step: 1,   min: 1,   def: 2, max: 40 },
+    plancha: { step: 1,   min: 1,   def: 1, max: 10 },
+  };
+  // artículo/palabra correctos en español para cada unidad (evita "el unidad")
+  const UNIT_WORD = {
+    kg:      { suffix: 'kg',      article: 'el kg',      stepWord: 'medio kilo' },
+    un:      { suffix: 'unidad',  article: 'la unidad',  stepWord: 'una unidad' },
+    plancha: { suffix: 'plancha', article: 'la plancha', stepWord: 'una plancha' },
+  };
   const unitOf = (p) => UNITS[p.unit] || UNITS.kg;
+  const unitWord = (p) => UNIT_WORD[p.unit] || UNIT_WORD.kg;
   const snap = (p, n) => { const u = unitOf(p); return clamp(Math.round(n / u.step) * u.step, u.min, u.max); };
-  const perWord = (p) => (p.unit === 'un' ? 'unidad' : 'kg');
   const variantOf = (p, id) => p.variants.find((v) => v.id === id) || p.variants[0];
   const minPrice = (p) => Math.min(...p.variants.map((v) => v.price));
-  const thumb = (p) => `assets/img/${p.image.file}-${p.image.sizes[0]}.webp`;
+
+  // cada gusto tiene su propia foto; si no la tiene, se usa la del primer gusto
+  const defaultImage = (p) => p.variants[0].image;
+  const imageOf = (p, v) => (v && v.image) || defaultImage(p);
+  const imgSrc = (img, w) => `assets/img/${img.file}-${w}.webp`;
+  const imgSrcset = (img) => img.sizes.map((s) => `${imgSrc(img, s)} ${s}w`).join(', ');
+  const thumb = (p, v) => { const img = imageOf(p, v); return imgSrc(img, img.sizes[0]); };
 
   function qtyText(p, q) {
     if (p.unit === 'un') return q === 1 ? '1 unidad' : `${q} unidades`;
+    if (p.unit === 'plancha') return q === 1 ? '1 plancha' : `${q} planchas`;
     const whole = Math.floor(q);
     const half = q - whole >= 0.5;
     if (!whole) return '½ kg';
@@ -58,20 +75,21 @@
     </fieldset>`;
 
   function cardHTML(p, i) {
-    const img = p.image;
-    const srcset = img.sizes.map((s) => `assets/img/${img.file}-${s}.webp ${s}w`).join(', ');
+    const img = defaultImage(p);
     const sizes = p.size === 'lg'
       ? '(min-width: 1040px) 600px, (min-width: 720px) 46vw, 92vw'
       : '(min-width: 1040px) 394px, (min-width: 720px) 46vw, 92vw';
     const v0 = p.variants[0];
     const u = unitOf(p);
+    const uw = unitWord(p);
     const day = new Date().getDate();
     const ribbon = p.id === 'noquis' && day >= 20 && day <= 29 ? '<span class="card__ribbon">Se viene el 29: reservá los tuyos</span>' : '';
+    const metaRight = p.unit === 'un' ? '≈ 2 por persona' : p.unit === 'plancha' ? `Plancha de ${p.perTray} unidades` : '1 kg ≈ 4 porciones';
     return `
     <article class="card card--${p.size}" id="p-${p.id}" data-id="${p.id}" data-reveal style="--d:${(i % 3) * 110}">
       <div class="card__media" style="--bg:${img.color}">
-        <img src="assets/img/${img.file}-${img.sizes[0]}.webp" srcset="${srcset}" sizes="${sizes}" width="${img.w}" height="${img.h}" alt="${esc(img.alt)}" loading="lazy" decoding="async">
-        <span class="card__tag"><b data-price>${money(v0.price)}</b><small>/${perWord(p)}</small></span>
+        <img data-file="${img.file}" src="${imgSrc(img, img.sizes[0])}" srcset="${imgSrcset(img)}" sizes="${sizes}" width="${img.w}" height="${img.h}" alt="${esc(img.alt)}" loading="lazy" decoding="async">
+        <span class="card__tag"><b data-price>${money(v0.price)}</b><small>/${uw.suffix}</small></span>
         ${ribbon}
       </div>
       <div class="card__body">
@@ -80,7 +98,7 @@
         ${p.variants.length > 1 ? chipsHTML(p) : ''}
         <p class="card__meta">
           <span><svg class="ico" aria-hidden="true"><use href="#i-clock"/></svg>Cocción: ${esc(p.cook)}</span>
-          <span>${p.unit === 'un' ? '≈ 2 por persona' : '1 kg ≈ 4 porciones'}</span>
+          <span>${metaRight}</span>
         </p>
         <div class="portions">
           <span class="portions__label">¿Para cuántos?</span>
@@ -90,9 +108,9 @@
         </div>
         <div class="card__buy">
           <div class="stepper" role="group" aria-label="Cantidad de ${esc(p.name)}">
-            <button type="button" data-act="minus" aria-label="Restar ${p.unit === 'un' ? 'una unidad' : 'medio kilo'}"><svg class="ico" aria-hidden="true"><use href="#i-minus"/></svg></button>
+            <button type="button" data-act="minus" aria-label="Restar ${uw.stepWord}"><svg class="ico" aria-hidden="true"><use href="#i-minus"/></svg></button>
             <output aria-live="polite">${qtyText(p, u.def)}</output>
-            <button type="button" data-act="plus" aria-label="Sumar ${p.unit === 'un' ? 'una unidad' : 'medio kilo'}"><svg class="ico" aria-hidden="true"><use href="#i-plus"/></svg></button>
+            <button type="button" data-act="plus" aria-label="Sumar ${uw.stepWord}"><svg class="ico" aria-hidden="true"><use href="#i-plus"/></svg></button>
           </div>
           <button class="btn btn--primary add" type="button"><span class="add__label">Agregar</span><span class="add__price">${money(v0.price * u.def)}</span></button>
         </div>
@@ -104,6 +122,8 @@
     const u = unitOf(p);
     let vi = 0;
     let q = u.def;
+    const media = $('.card__media', card);
+    const imgEl = $('.card__media img', card);
     const tag = $('.card__tag', card);
     const tagPrice = $('[data-price]', card);
     const out = $('output', card);
@@ -114,7 +134,29 @@
     const plus = $('[data-act="plus"]', card);
     const presets = $$('.portions button', card);
     const chipInputs = $$('.chips input', card);
-    const peopleQty = (n) => snap(p, p.unit === 'un' ? n * 2 : n / 4);
+    const peopleQty = (n) => {
+      if (p.unit === 'un') return snap(p, n * 2);
+      if (p.unit === 'plancha') return snap(p, Math.ceil(n / p.servesPerTray));
+      return snap(p, n / 4);
+    };
+
+    // foto por sabor: precarga la nueva antes de mostrarla (crossfade sin "parpadeo")
+    function swapImage(v) {
+      if (!imgEl || p.variants.length < 2) return;
+      const img = imageOf(p, v);
+      if (img.file === imgEl.dataset.file) return;
+      imgEl.classList.add('is-swapping');
+      const pre = new Image();
+      pre.onload = pre.onerror = () => {
+        imgEl.src = imgSrc(img, img.sizes[0]);
+        imgEl.srcset = imgSrcset(img);
+        imgEl.alt = img.alt;
+        imgEl.dataset.file = img.file;
+        if (media) media.style.setProperty('--bg', img.color);
+        requestAnimationFrame(() => imgEl.classList.remove('is-swapping'));
+      };
+      pre.src = imgSrc(img, img.sizes[0]);
+    }
 
     const paint = (pulse) => {
       const v = p.variants[vi];
@@ -127,6 +169,13 @@
       if (pulse && !reduce) { tag.classList.remove('pulse'); void tag.offsetWidth; tag.classList.add('pulse'); }
     };
 
+    function selectVariant(newVi, pulse) {
+      if (newVi === vi) { if (pulse) paint(true); return; }
+      vi = newVi;
+      swapImage(p.variants[vi]);
+      paint(pulse);
+    }
+
     // se llama desde el filtro "Vegetarianas" del menú (ver applyMenuFilter)
     card.__setVegOnly = (vegOnly) => {
       chipInputs.forEach((inp, idx) => {
@@ -136,12 +185,12 @@
       });
       if (vegOnly && !p.variants[vi].veg) {
         const fi = p.variants.findIndex((v) => v.veg);
-        if (fi > -1) { vi = fi; chipInputs[fi].checked = true; paint(true); }
+        if (fi > -1) { chipInputs[fi].checked = true; selectVariant(fi, true); }
       }
     };
 
     card.addEventListener('change', (e) => {
-      if (e.target.name === `v-${p.id}`) { vi = Number(e.target.value); paint(true); }
+      if (e.target.name === `v-${p.id}`) selectVariant(Number(e.target.value), true);
     });
     minus.addEventListener('click', () => { q = snap(p, q - u.step); paint(); });
     plus.addEventListener('click', () => { q = snap(p, q + u.step); paint(); });
@@ -151,7 +200,7 @@
     add.addEventListener('click', () => {
       const v = p.variants[vi];
       addToCart(p.id, v.id, q);
-      fly(add, p);
+      fly(add, p, v);
       announce(`${qtyText(p, q)} de ${p.name}${p.variants.length > 1 ? ' (' + v.name + ')' : ''} agregado al pedido. Total: ${money(cartTotal())}.`);
       add.classList.add('is-done');
       addLabel.textContent = '¡Agregado!';
@@ -253,11 +302,11 @@
     const u = unitOf(p);
     return `
     <li class="line" data-key="${key}">
-      <img class="line__img" src="${thumb(p)}" alt="" width="58" height="58" loading="lazy">
+      <img class="line__img" src="${thumb(p, v)}" alt="" width="58" height="58" loading="lazy">
       <div>
         <span class="line__name">${esc(p.name)}</span>
         ${p.variants.length > 1 ? `<span class="line__var">${esc(v.name)}</span>` : ''}
-        <span class="line__var">${money(v.price)} el ${perWord(p)}</span>
+        <span class="line__var">${money(v.price)} ${unitWord(p).article}</span>
       </div>
       <strong class="line__price">${money(lineTotal(l))}</strong>
       <div class="line__ctrl">
@@ -281,7 +330,7 @@
       <p class="cart__cross-label">¿Sumás algo más?</p>
       <div class="cart__cross-item">
         <img src="${thumb(sug)}" alt="" width="46" height="46" loading="lazy">
-        <div class="cart__cross-info"><strong>${esc(sug.name)}</strong><span>${money(minPrice(sug))}${sug.unit === 'un' ? ' c/u' : '/kg'}</span></div>
+        <div class="cart__cross-info"><strong>${esc(sug.name)}</strong><span>${money(minPrice(sug))}/${unitWord(sug).suffix}</span></div>
         <button type="button" class="btn btn--ghost cart__cross-add" data-id="${sug.id}">+ Agregar</button>
       </div>`;
   }
@@ -521,7 +570,7 @@
     setTimeout(() => node.classList.remove('bump'), 700);
   }
 
-  function fly(fromEl, p) {
+  function fly(fromEl, p, v) {
     const usePill = getComputedStyle(el.pill).display !== 'none';
     const target = usePill ? el.pill : el.btn;
     if (reduce) { bump(target); return; }
@@ -531,7 +580,7 @@
     const size = 46;
     const d = document.createElement('div');
     d.setAttribute('aria-hidden', 'true');
-    d.style.cssText = `position:fixed;left:0;top:0;width:${size}px;height:${size}px;border-radius:50%;z-index:120;pointer-events:none;border:3px solid #fff;box-shadow:0 14px 26px -8px rgba(0,0,0,.5);background:#fff url(${thumb(p)}) center/cover no-repeat;`;
+    d.style.cssText = `position:fixed;left:0;top:0;width:${size}px;height:${size}px;border-radius:50%;z-index:120;pointer-events:none;border:3px solid #fff;box-shadow:0 14px 26px -8px rgba(0,0,0,.5);background:#fff url(${thumb(p, v)}) center/cover no-repeat;`;
     document.body.appendChild(d);
     const sx = a.left + a.width / 2 - size / 2;
     const sy = a.top + a.height / 2 - size / 2;
@@ -551,9 +600,8 @@
      TEXTOS DINÁMICOS (precios, contacto, SEO)
      ================================================================= */
   function fillStatic() {
-    $$('[data-price-of]').forEach((n) => { const p = byId[n.dataset.priceOf]; if (p) n.textContent = money(minPrice(p)) + (p.unit === 'un' ? ' c/u' : '/kg'); });
-    const perKg = PRODUCTS.filter((p) => p.unit !== 'un');
-    $$('[data-min-price]').forEach((n) => { n.textContent = money(Math.min(...(perKg.length ? perKg : PRODUCTS).map(minPrice))); });
+    $$('[data-price-of]').forEach((n) => { const p = byId[n.dataset.priceOf]; if (p) n.textContent = money(minPrice(p)) + '/' + unitWord(p).suffix; });
+    $$('[data-min-price]').forEach((n) => { n.textContent = money(Math.min(...PRODUCTS.map(minPrice))); });
     $$('[data-wa-link]').forEach((a) => {
       if (!waNumber) { a.hidden = true; return; }
       a.href = waLink('¡Hola! Quería hacer una consulta.');
